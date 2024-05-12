@@ -1,0 +1,75 @@
+@use "base/variables" as v;
+@use "base/mixins" as m;
+
+.contenedor-app {
+    @include m.tablet {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        min-height: 100vh;
+    }
+
+    .imagen {
+        height: 20rem;
+        background-image: url(../img/1.jpg);
+        background-size: cover;
+        background-position: center center;
+        @include m.tablet {
+            height: auto;
+        }
+    }
+
+    .app {
+        width: 95%;
+        margin: 0 auto;
+        padding: 3rem;
+        @include m.tablet {
+            overflow: scroll;
+            overflow-x: hidden;
+        }
+
+            &::-webkit-scrollbar {
+                width: 10px;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background-color: v.$gris-oscuro;
+                border-radius: 10px;
+            }
+    }
+}
+
+.barra {
+    text-align: center;
+    margin: v.$separacion 0;
+
+    @include m.tablet {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .boton {
+        @include m.boton(v.$gris-oscuro, v.$blanco);
+        margin: 0;
+    }
+}
+
+.barra-servicios {
+    margin-bottom: v.$separacion;
+
+    @include m.tablet {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 20px;
+
+        > * { // Select all direct children of .barra-servicios
+            flex: 1 0 calc(33.33% - 20px); // Grow and shrink equally, default width of 33.33% minus margins
+            margin: 10px; // Add some margin around the items
+        }
+    }
+
+    .boton {
+        margin: 0 0 1rem 0;
+    }
+}
